@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Action ou Vérité - Niveau IMPOSSIBLE</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
+
+    body {
+      margin: 0; padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: radial-gradient(circle at center, #0f0c29, #302b63, #24243e);
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 25px;
+      user-select: none;
+    }
+
+    h1 {
+      font-size: 3.4rem;
+      margin-bottom: 35px;
+      letter-spacing: 2px;
+      color: #ff0055;
+      text-shadow: 0 0 10px #ff0055, 0 0 25px #ff0055, 0 0 40px #ff0055;
+      text-transform: uppercase;
+    }
+
+    #display {
+      background: rgba(255, 0, 85, 0.15);
+      border: 3px solid #ff0055;
+      border-radius: 25px;
+      box-shadow: 0 0 20px 5px #ff0055;
+      padding: 35px 50px;
+      max-width: 700px;
+      font-size: 1.8rem;
+      min-height: 180px;
+      margin-bottom: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      user-select: text;
+      transition: all 0.4s ease;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 35px;
+      margin-bottom: 50px;
+    }
+
+    button {
+      cursor: pointer;
+      border: 2px solid #ff0055;
+      background: transparent;
+      padding: 22px 60px;
+      border-radius: 60px;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #ff0055;
+      text-transform: uppercase;
+      letter-spacing: 1.3px;
+      box-shadow: 0 0 15px #ff0055;
+      transition: all 0.3s ease;
+      user-select: none;
+    }
+
+    button:hover:not(:disabled) {
+      background: #ff0055;
+      color: #fff;
+      box-shadow: 0 0 25px #ff3388;
+      transform: scale(1.08);
+    }
+
+    button:disabled {
+      cursor: default;
+      opacity: 0.3;
+      box-shadow: none;
+      transform: none;
+    }
+
+    #level-up-btn {
+      display: none;
+      background: #ff0055;
+      color: #fff;
+      padding: 22px 70px;
+      font-size: 1.6rem;
+      border-radius: 70px;
+      cursor: pointer;
+      user-select: none;
+      letter-spacing: 1.6px;
+      text-transform: uppercase;
+      box-shadow: 0 0 30px #ff0055;
+      margin-top: 15px;
+      transition: background-color 0.3s ease;
+    }
+
+    #level-up-btn:hover {
+      background-color: #cc0044;
+      box-shadow: 0 0 40px #cc0044;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Action ou Vérité - Niveau IMPOSSIBLE</h1>
+
+  <div class="btn-group">
+    <button id="action-btn">Action</button>
+    <button id="verite-btn">Vérité</button>
+  </div>
+
+  <div id="display">Clique sur Action ou Vérité pour commencer !</div>
+
+  <button id="level-up-btn" title="Retour au début">Recommencer ↻</button>
+
+  <script>
+    const actions = [
+      "Laisse ton/ta voisin(e) te toucher une partie intime pendant 30 secondes",
+      "Appelle un inconnu et dis-lui que tu l’aimes.",
+      "Echanger vos sous-vêtements.",
+      "Fais l'amour avec ton / ta voisin(e) pendant 5 minutes."
+    ];
+
+    const verites = [
+      "Pourrais-tu faire l'amour avec n'importe qui maintenant ?",
+      "Quelle est ta meilleure pause au lit ?",
+      "Raconte ta pire expérience amoureuse en détail.",
+      "As-tu déjà fait quelque chose d’illégal ?"
+    ];
+
+    let remainingActions = [...actions];
+    let remainingVerites = [...verites];
+
+    const display = document.getElementById("display");
+    const actionBtn = document.getElementById("action-btn");
+    const veriteBtn = document.getElementById("verite-btn");
+    const levelUpBtn = document.getElementById("level-up-btn");
+
+    function getRandomAndRemove(arr) {
+      if (arr.length === 0) return null;
+      const index = Math.floor(Math.random() * arr.length);
+      const item = arr[index];
+      arr.splice(index, 1);
+      return item;
+    }
+
+    function checkIfFinished() {
+      if (remainingActions.length === 0 && remainingVerites.length === 0) {
+        display.textContent = "Tu as terminé toutes les actions et vérités de ce niveau IMPOSSIBLE !";
+        actionBtn.disabled = true;
+        veriteBtn.disabled = true;
+        levelUpBtn.style.display = "inline-block";
+      }
+    }
+
+    actionBtn.addEventListener("click", () => {
+      const action = getRandomAndRemove(remainingActions);
+      if (action) {
+        display.textContent = action;
+      } else {
+        display.textContent = "Plus d'actions disponibles. Essaie une vérité !";
+      }
+      checkIfFinished();
+    });
+
+    veriteBtn.addEventListener("click", () => {
+      const verite = getRandomAndRemove(remainingVerites);
+      if (verite) {
+        display.textContent = verite;
+      } else {
+        display.textContent = "Plus de vérités disponibles. Essaie une action !";
+      }
+      checkIfFinished();
+    });
+
+    levelUpBtn.addEventListener("click", () => {
+      window.location.href = "index.html";
+    });
+  </script>
+
+</body>
+</html>

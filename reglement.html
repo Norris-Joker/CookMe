@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Règlement - Action ou Vérité</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(to right, #ff758c, #ff7eb3);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      text-align: center;
+      position: relative;
+      padding: 20px;
+    }
+
+    .bubble {
+      position: absolute;
+      bottom: -100px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      animation: floatUp 12s infinite ease-in;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-130vh) scale(1.4);
+        opacity: 0;
+      }
+    }
+
+    h1 {
+      font-size: 2.6em;
+      background: linear-gradient(90deg, #fff, #ffd6e0, #fff);
+      background-size: 200%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shine 3s linear infinite;
+      margin-bottom: 20px;
+    }
+
+    @keyframes shine {
+      0% {
+        background-position: 200% center;
+      }
+      100% {
+        background-position: -200% center;
+      }
+    }
+
+    .rules-box {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 15px;
+      padding: 25px;
+      max-width: 400px;
+      font-size: 1.1em;
+      line-height: 1.6;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+      margin-bottom: 30px;
+    }
+
+    .btn-start {
+      background-color: white;
+      color: #ff4d6d;
+      border: none;
+      padding: 14px 30px;
+      font-size: 1.3em;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+    }
+
+    .btn-start:hover {
+      transform: scale(1.08);
+      box-shadow: 0 0 25px rgba(255, 255, 255, 0.5);
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Règles du jeu</h1>
+
+  <div class="rules-box">
+    Ce jeu se joue à <strong>2 joueurs</strong>.  
+    À tour de rôle, chaque joueur choisit <strong>Action</strong> ou <strong>Vérité</strong>.  
+    Une question ou un défi s’affichera à l’écran.  
+    Le joueur doit <strong>répondre honnêtement</strong> ou <strong>réaliser le défi</strong>.  
+    Refuser deux fois d’affilée est interdit.  
+    <strong><br>⚠️ Si un joueur refuse de faire une Action ou une Vérité, il reçoit 4 gifles</strong> sur la partie du corps <strong>de son choix</strong>.   
+    L’objectif est de s’amuser !<br><strong>VOUS AVEZ 3 VIES CHACUNS !</strong>
+  </div>
+
+  <button class="btn-start" onclick="window.location.href='jeu.html'">COMMENCER</button>
+
+  <!-- Bulles animées -->
+  <script>
+    for (let i = 0; i < 20; i++) {
+      const bubble = document.createElement("div");
+      bubble.className = "bubble";
+      bubble.style.width = bubble.style.height = `${Math.random() * 40 + 10}px`;
+      bubble.style.left = `${Math.random() * 100}%`;
+      bubble.style.animationDuration = `${Math.random() * 10 + 5}s`;
+      document.body.appendChild(bubble);
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Action ou Vérité</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    /* Fond animé avec bulles */
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(to right, #ff758c, #ff7eb3);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      text-align: center;
+      position: relative;
+    }
+
+    /* Bulles */
+    .bubble {
+      position: absolute;
+      bottom: -100px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      animation: floatUp 10s infinite ease-in;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-120vh) scale(1.5);
+        opacity: 0;
+      }
+    }
+
+    /* Titre avec effet de brillance */
+    h1 {
+      font-size: 3em;
+      background: linear-gradient(90deg, #fff, #ffd6e0, #fff);
+      background-size: 200%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shine 3s linear infinite;
+      margin-bottom: 10px;
+    }
+
+    @keyframes shine {
+      0% {
+        background-position: 200% center;
+      }
+      100% {
+        background-position: -200% center;
+      }
+    }
+
+    /* Texte intro */
+    p {
+      font-size: 1.2em;
+      margin-bottom: 40px;
+      max-width: 300px;
+      opacity: 0.95;
+    }
+
+    /* Bouton JOUER avec zoom et ombre */
+    .btn-play {
+      background-color: white;
+      color: #ff4d6d;
+      border: none;
+      padding: 15px 40px;
+      font-size: 1.4em;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+    }
+
+    .btn-play:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 25px rgba(255, 255, 255, 0.6);
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Bienvenue !</h1>
+  <p>Prêt(e) à jouer à Action ou Vérité ?</p>
+  <button class="btn-play" onclick="window.location.href='reglement.html'">JOUER</button>
+
+  <!-- Génération de bulles -->
+  <script>
+    for (let i = 0; i < 25; i++) {
+      const bubble = document.createElement("div");
+      bubble.className = "bubble";
+      bubble.style.width = bubble.style.height = `${Math.random() * 40 + 10}px`;
+      bubble.style.left = `${Math.random() * 100}%`;
+      bubble.style.animationDuration = `${Math.random() * 10 + 5}s`;
+      document.body.appendChild(bubble);
+    }
+  </script>
+
+</body>
+</html>

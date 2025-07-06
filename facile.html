@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Action ou Vérité - Niveau Facile</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+
+    body {
+      margin: 0; padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #fddb92 0%, #d1fdff 100%);
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+      overflow-x: hidden;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 30px;
+      letter-spacing: 1.2px;
+      color: #3b3b3b;
+      text-shadow: 0 2px 8px rgba(255, 255, 255, 0.7);
+    }
+
+    #display {
+      background: rgba(255 255 255 / 0.8);
+      border-radius: 20px;
+      box-shadow: 0 8px 32px 0 rgba(0,0,0,0.1);
+      padding: 30px 40px;
+      max-width: 550px;
+      font-size: 1.5rem;
+      min-height: 140px;
+      margin-bottom: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.5s ease;
+      user-select: none;
+      color: #1a1a1a;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 30px;
+      margin-bottom: 40px;
+    }
+
+    button {
+      cursor: pointer;
+      border: none;
+      padding: 18px 45px;
+      border-radius: 40px;
+      font-size: 1.2rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+      user-select: none;
+      background: #4db6ac;
+      color: white;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+    }
+    button:hover:not(:disabled) {
+      background: #367a75;
+      box-shadow: 0 6px 20px rgba(54,122,117,0.7);
+      transform: translateY(-3px);
+    }
+
+    button:disabled {
+      cursor: default;
+      opacity: 0.5;
+      box-shadow: none;
+      transform: none;
+    }
+
+    #level-up-btn {
+      background: #ff6f61;
+      box-shadow: 0 6px 20px rgba(255,111,97,0.9);
+      color: #fff;
+      padding: 18px 50px;
+      font-size: 1.4rem;
+      border-radius: 60px;
+      cursor: pointer;
+      user-select: none;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      display: none;
+      margin-top: 10px;
+      transition: background-color 0.3s ease;
+    }
+    #level-up-btn:hover {
+      background-color: #d1544c;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Action ou Vérité - Niveau Facile</h1>
+
+  <div class="btn-group">
+    <button id="action-btn">Action</button>
+    <button id="verite-btn">Vérité</button>
+  </div>
+
+  <div id="display">Clique sur Action ou Vérité pour commencer !</div>
+
+  <button id="level-up-btn" title="Passer au niveau Intermédiaire">Niveau supérieur →</button>
+
+  <script>
+    const actions = [
+      "Reste sur 1 jambe pendant 30 secondes.",
+      "Appelle un inconnu en masqué.",
+      "Reste debous jusqu'à la fin du niveau",
+      "Parle avec un accent chinois pendant 1 minute."
+    ];
+
+    const verites = [
+      "As-tu déjà volé quelque chose ?",
+      "Quel est le secret que tu n’as jamais dit à personne ?",
+      "Quelle est la chose la plus embarrassante que tu aies faite ?",
+      "Quelle est ta plus grosse bêtise d’enfance ?"
+    ];
+
+    let remainingActions = [...actions];
+    let remainingVerites = [...verites];
+
+    const display = document.getElementById("display");
+    const actionBtn = document.getElementById("action-btn");
+    const veriteBtn = document.getElementById("verite-btn");
+    const levelUpBtn = document.getElementById("level-up-btn");
+
+    function getRandomAndRemove(arr) {
+      if (arr.length === 0) return null;
+      const index = Math.floor(Math.random() * arr.length);
+      const item = arr[index];
+      arr.splice(index, 1);
+      return item;
+    }
+
+    function checkIfFinished() {
+      if (remainingActions.length === 0 && remainingVerites.length === 0) {
+        display.textContent = "Tu as terminé toutes les actions et vérités de ce niveau !";
+        actionBtn.disabled = true;
+        veriteBtn.disabled = true;
+        levelUpBtn.style.display = "inline-block";
+      }
+    }
+
+    actionBtn.addEventListener("click", () => {
+      const action = getRandomAndRemove(remainingActions);
+      if (action) {
+        display.textContent = action;
+      } else {
+        display.textContent = "Plus d'actions disponibles. Essaie une vérité !";
+      }
+      checkIfFinished();
+    });
+
+    veriteBtn.addEventListener("click", () => {
+      const verite = getRandomAndRemove(remainingVerites);
+      if (verite) {
+        display.textContent = verite;
+      } else {
+        display.textContent = "Plus de vérités disponibles. Essaie une action !";
+      }
+      checkIfFinished();
+    });
+
+    levelUpBtn.addEventListener("click", () => {
+      window.location.href = "intermediaire.html"; // modifier pour la prochaine page
+    });
+  </script>
+
+</body>
+</html>

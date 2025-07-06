@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Action ou Vérité - Niveau Chill</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+
+    body {
+      margin: 0; padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%);
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+      overflow-x: hidden;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 30px;
+      text-shadow: 0 3px 10px rgba(0,0,0,0.3);
+      letter-spacing: 1.2px;
+    }
+
+    #display {
+      background: rgba(255 255 255 / 0.15);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      box-shadow: 0 8px 32px 0 rgba(0,0,0,0.25);
+      padding: 30px 40px;
+      max-width: 500px;
+      font-size: 1.5rem;
+      min-height: 130px;
+      margin-bottom: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.5s ease;
+      user-select: none;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 30px;
+      margin-bottom: 40px;
+    }
+
+    button {
+      cursor: pointer;
+      border: none;
+      padding: 18px 45px;
+      border-radius: 40px;
+      font-size: 1.2rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(255,255,255,0.3);
+      user-select: none;
+      background: #fff;
+      color: #66a6ff;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+    }
+    button:hover:not(:disabled) {
+      background: #66a6ff;
+      color: #fff;
+      box-shadow: 0 6px 20px rgba(102,166,255,0.6);
+      transform: translateY(-3px);
+    }
+
+    button:disabled {
+      cursor: default;
+      opacity: 0.5;
+      box-shadow: none;
+      transform: none;
+    }
+
+    #level-up-btn {
+      background: #ff4d6d;
+      box-shadow: 0 6px 20px rgba(255,77,109,0.9);
+      color: #fff;
+      padding: 18px 50px;
+      font-size: 1.4rem;
+      border-radius: 60px;
+      cursor: pointer;
+      user-select: none;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      display: none;
+      margin-top: 10px;
+      transition: background-color 0.3s ease;
+    }
+    #level-up-btn:hover {
+      background-color: #d43b57;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Action ou Vérité - Niveau Chill</h1>
+
+  <div class="btn-group">
+    <button id="action-btn">Action</button>
+    <button id="verite-btn">Vérité</button>
+  </div>
+
+  <div id="display">Clique sur Action ou Vérité pour commencer !</div>
+
+  <button id="level-up-btn" title="Passer au niveau Facile">Niveau supérieur →</button>
+
+  <script>
+    const actions = [
+      "Saute 10 fois",
+      "Enlève tes chaussettes",
+      "Fait 4 pompes",
+      "Imite un trisomique sans faire de bruit pendant 15 secondes"
+    ];
+
+    const verites = [
+      "Quelle est ta plus grande peur ?",
+      "As-tu déjà menti pour éviter un problème ?",
+      "Quel est ton rêve secret ?",
+      "Quelle est la dernière fois que tu as pleuré ?"
+    ];
+
+    let remainingActions = [...actions];
+    let remainingVerites = [...verites];
+
+    const display = document.getElementById("display");
+    const actionBtn = document.getElementById("action-btn");
+    const veriteBtn = document.getElementById("verite-btn");
+    const levelUpBtn = document.getElementById("level-up-btn");
+
+    function getRandomAndRemove(arr) {
+      if (arr.length === 0) return null;
+      const index = Math.floor(Math.random() * arr.length);
+      const item = arr[index];
+      arr.splice(index, 1);
+      return item;
+    }
+
+    function checkIfFinished() {
+      if (remainingActions.length === 0 && remainingVerites.length === 0) {
+        display.textContent = "Tu as terminé toutes les actions et vérités de ce niveau !";
+        actionBtn.disabled = true;
+        veriteBtn.disabled = true;
+        levelUpBtn.style.display = "inline-block";
+      }
+    }
+
+    actionBtn.addEventListener("click", () => {
+      const action = getRandomAndRemove(remainingActions);
+      if (action) {
+        display.textContent = action;
+      } else {
+        display.textContent = "Plus d'actions disponibles. Essaie une vérité !";
+      }
+      checkIfFinished();
+    });
+
+    veriteBtn.addEventListener("click", () => {
+      const verite = getRandomAndRemove(remainingVerites);
+      if (verite) {
+        display.textContent = verite;
+      } else {
+        display.textContent = "Plus de vérités disponibles. Essaie une action !";
+      }
+      checkIfFinished();
+    });
+
+    levelUpBtn.addEventListener("click", () => {
+      window.location.href = "facile.html"; // modifier selon la page suivante
+    });
+  </script>
+
+</body>
+</html>
